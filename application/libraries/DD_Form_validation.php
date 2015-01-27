@@ -3,7 +3,7 @@
 /**
  * Class Layout
  */
-class MY_Form_validation extends CI_Form_validation {
+class DD_Form_validation extends CI_Form_validation {
 
     function __construct()
     {

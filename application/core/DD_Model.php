@@ -4,7 +4,7 @@
 /**
  * Class MY_Model
  */
-class MY_Model extends CI_Model {
+class DD_Model extends CI_Model {
 
     /**
      *

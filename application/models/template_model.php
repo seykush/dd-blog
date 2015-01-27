@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Template_model extends MY_Model
+class Template_model extends DD_Model
 {
     ///////Example Manufacturer
     private $select = array(

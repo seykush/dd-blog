@@ -4,7 +4,7 @@
 /**
  * Class MY_Router
  */
-class MY_Router extends CI_Router {
+class DD_Router extends CI_Router {
 
     /**
      * @param $segments
