@@ -1,6 +1,6 @@
 <?php
 $config['full_tag_open'] = '<div><ul  class="pagination">';
-$config['full_tag_close'] = '</ul></div><!--pagination-->';
+$config['full_tag_close'] = '</ul></div>';
 
 $config['first_link'] = '&laquo; Назад';
 $config['first_tag_open'] = '<li class="prev page">';

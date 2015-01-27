@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://dd-ci.loc/';
+$config['base_url']	= 'http://dd-blog.info/';
 
 
 /*
