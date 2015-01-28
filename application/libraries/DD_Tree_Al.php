@@ -30,7 +30,7 @@ class DD_Tree_Al {
      * Theme name
      * @var string
      */
-    private $_theme = 'main';
+    private $_theme = 'default';
 
     /**
      * Config file name

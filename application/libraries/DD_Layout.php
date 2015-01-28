@@ -421,16 +421,15 @@ class DD_Layout {
             $view = FALSE;
             if($return)
             {
-                $view = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}",$data,$return);
+                $view = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $data, $return);
                 if($to_layout)
                 {
                     $this->_load_config($module_name, $view_name);
                 }
-
             }
             else
             {
-                $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}",$data,$return);
+                $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $data, $return);
                 return TRUE;
             }
             return $view;
@@ -461,14 +460,14 @@ class DD_Layout {
         }
         else
         {
-            $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}",$content_data,true);
+            $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
             $this->_load_config($module_name, $view_name);
         }
         if( ! empty($this->_parts))
         {
             foreach($this->_parts as $part)
             {
-                $data[$part] = $this->_CI->load->view("{$this->_site_side}/layout/{$this->_theme_name}/{$part}",$this->_parts_data[$part],true);
+                $data[$part] = $this->_CI->load->view("{$this->_site_side}/layout/{$this->_theme_name}/{$part}", $this->_parts_data[$part], true);
                 $this->_load_config('', $part);
             }
         }
@@ -476,6 +475,6 @@ class DD_Layout {
         $data['options'] = $this->_options;
         $data['tags'] = $this->render_tags();
 
-        $this->_CI->load->view("{$this->_site_side}/layout/{$this->_theme_name}/template",$data);
+        $this->_CI->load->view("{$this->_site_side}/layout/{$this->_theme_name}/template", $data);
     }
 }
