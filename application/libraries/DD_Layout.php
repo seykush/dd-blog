@@ -443,12 +443,12 @@ class DD_Layout {
 
     /**
      * Render content with layout
+     * @param null $content_data
      * @param string $module_name
      * @param string $view_name
-     * @param null $content_data
      * @param string $title
      */
-    public function render_page($module_name = '', $view_name = '', $content_data = null, $title = '')
+    public function render_page($content_data = null, $module_name = '', $view_name = '', $title = '')
     {
         if(is_null($content_data))
         {
@@ -456,13 +456,11 @@ class DD_Layout {
         }
         if(empty($module_name) && empty($view_name))
         {
-            $data['content'] = '';
+            $module_name = $this->_CI->router->fetch_class();
+            $view_name = $this->_CI->router->fetch_method();
         }
-        else
-        {
-            $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
-            $this->_load_config($module_name, $view_name);
-        }
+        $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
+        $this->_load_config($module_name, $view_name);
         if( ! empty($this->_parts))
         {
             foreach($this->_parts as $part)

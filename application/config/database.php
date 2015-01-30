@@ -53,7 +53,7 @@ $db['default']['username'] = 'root';
 $db['default']['password'] = '123';
 $db['default']['database'] = 'dd_blog';
 
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

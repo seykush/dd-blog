@@ -9,7 +9,7 @@ class Main extends Admin_Controller {
 
     public function index()
     {
-        $this->layout->render_page('main', 'index', null, 'Admin');
+        $this->layout->render_page();
     }
 
 

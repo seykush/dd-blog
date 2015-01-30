@@ -40,7 +40,6 @@
 
 $route['default_controller'] = "frontend/main";
 $route['404_override'] = '';
-$route['api/(:any)'] = 'api/$1';
 $route['admin'] = 'admin/main';
 $route['admin/(:any)'] = 'admin/$1';
 $route['(:any)'] = 'frontend/$1';

@@ -9,7 +9,7 @@ class Main extends Frontend_Controller {
 
     public function index()
     {
-        $this->layout->render_page('main', 'index', null, 'Frontend');
+        $this->layout->render_page();
     }
 }
 

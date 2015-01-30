@@ -74,7 +74,7 @@ class CI_Controller {
 
 	/**
 	 *
-	 * @var CI_Form_validation
+	 * @var DD_Form_validation
 	 */
 	public $form_validation;
 
@@ -184,44 +184,7 @@ class CI_Controller {
      */
     public $auth;
 
-    /**
-     *
-     * @var Category_model
-     */
-    public $category_model;
 
-
-    /**
-     *
-     * @var User_model
-     */
-    public $user_model;
-
-    /**
-     *
-     * @var Manufacturer_model
-     */
-    public $manufacturer_model;
-    /**
-     *
-     * @var City_model
-     */
-    public $city_model;
-    /**
-     *
-     * @var Order_model
-     */
-    public $order_model;
-    /**
-     *
-     * @var Product_model
-     */
-    public $product_model;
-    /**
-     *
-     * @var Transaction_model
-     */
-    public $transaction_model;
 
 }
 
@@ -258,7 +221,7 @@ class CI_Model {
 }
 
 
-class MY_Layout {
+class DD_Layout {
     /**
      *
      * @var CI_Config
