@@ -3,80 +3,90 @@
 /**
  * Class DD_Auth
  */
-class DD_Auth
-{
-    private $user_types = array(
-        'company' => 1,
-        'company_worker' => 2,
-        'supplier' => 3,
-        'user' => 4,
-        'super_admin' => 10,
-        'admin_lvl_1' => 11,
-        'admin_lvl_2' => 12,
-        'admin_lvl_3' => 13,
-        'admin_lvl_4' => 14,
-        'admin_lvl_5' => 15,
-        'admin_lvl_6' => 16,
-    );
+class DD_Auth {
+
+    /**
+     * CI Controller instance
+     * @var CI_Controller
+     */
     private $_CI;
+
+    /**
+     * @param null $params
+     */
     public function __construct($params = null)
     {
         $this->_CI = &get_instance();
-        //$this->_user = false;
-        //$this->_is_logged_in = false;
-        $this->_CI->load->model('user_model');
-    }
-    public function get_type()
-    {
-        $user = $this->get_info();
-        return $user['type_id'];
-    }
-    public function get_permission()
-    {
-        $site_side = str_replace('/','',$this->_CI->router->fetch_directory());
-        $class = $this->_CI->router->fetch_class();
-        $method = $this->_CI->router->fetch_method();
-        $result = $this->_CI->user_model->get_permissions($this->get_type(),$site_side.'.'.$class.'.'.$method);
-        //var_dump($result);die();
-        return !$result;
-    }
-    public function get_info()
-    {
-        return $this->_CI->session->userdata('user');
     }
 
-    public function login($user_data)
+    /**
+     * @param null $field
+     * @return array|string
+     */
+    public function get_session($field = null)
     {
-        if($user_data){
+        if(empty($field))
+        {
+            return $this->_CI->session->all_userdata();
+        }
+        else
+        {
+            return $this->_CI->session->userdata($field);
+        }
+    }
+
+    /**
+     * @param string $field
+     * @param bool $return
+     * @return array|bool|string
+     */
+    public function get_info($field = '', $return = FALSE)
+    {
+        $user = $this->get_session('user');
+        if(empty($field))
+        {
+            return $user;
+        }
+        if( ! empty($user[$field]))
+        {
+            return $user[$field];
+        }
+        return $return;
+    }
+
+    /**
+     * @param $user_data
+     * @param null $extra_data
+     * @return bool
+     */
+    public function login($user_data, $extra_data = NULL)
+    {
+        ///is allow to login in?
+        if( ! empty($user_data) && is_array($user_data))
+        {
+            if( ! empty($extra_data) && is_array($extra_data))
+            {
+                $user_data = array_merge($user_data, $extra_data);
+            }
             $this->_CI->session->set_userdata(array(
                 'user' => $user_data
             ));
-            return true;
+            return TRUE;
         }
-        return false;
+        return FALSE;
     }
 
-    public function register($user_data,$user_info_data)
-    {
-       return $this->_CI->user_model->create($user_data,$user_info_data);
-    }
-
-    public function change_password()
-    {
-
-    }
-
-    public function activate()
-    {
-
-    }
-
+    /**
+     * @return bool
+     */
     public function is_logged_in()
     {
-        $method = $this->_CI->router->fetch_method();
-
-        return $this->_CI->session->userdata('user')?TRUE:FALSE;
+        return $this->get_info()?TRUE:FALSE;
     }
+
+    /**
+     *
+     */
     public function logout()
     {
         $this->_CI->session->unset_userdata('user');
