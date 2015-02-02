@@ -1,10 +1,24 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['user_types'] = array(
-    array('id' => 1, 'name' => 'admin'),
-    array('id' => 2, 'name' => 'user'),
+$config['default']['role'] = array(
+    'admin',
+    'user'
 );
-$config['site_side_types'] = array(
-    'admin' => array(1),
-    'frontend' => array(1,2)
+$config['default']['login_access'] = array(
+    'admin' => array('admin'),
+    'frontend' => array('user')
+);
+$config['default']['access'] = array(
+    'admin' => array(
+        'main' => array(
+            'index' => array('admin'),
+            'login' => array('*'),
+            'ajax_login' => array('*')
+        )
+    ),
+    'frontend' => array(
+        'main' => array(
+            'index' => array('*')
+        )
+    )
 );

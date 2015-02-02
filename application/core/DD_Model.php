@@ -13,4 +13,5 @@ class DD_Model extends CI_Model {
     {
         parent::__construct();
     }
+
 }

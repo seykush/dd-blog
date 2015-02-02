@@ -12,30 +12,23 @@ class DD_Controller extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->library('DD_Auth',NULL,'auth');
+        $this->_ajax_method_check();
+
+
+        $this->output->enable_profiler(TRUE);
     }
 
-    /**
-     * @param $table_name
-     * @param $id
-     * @param $field_name
-     * @param $value
-     *
-     * @return bool
-     */
-    public function is_unique($table_name,$id,$field_name,$value)
+    private function _ajax_method_check()
     {
-        $current = $this->db->get_where($table_name,array('id' => $id));
-        $current = $current->row_array();
-        if ($value !== $current[$field_name])
+        $method = $this->router->fetch_method();
+        if(stristr($method,'ajax'))
         {
-            $this->db->where_not_in('id', array($id));
-            $result = $this->db->get_where($table_name, array($field_name => $value));
-            if ($result->num_rows() > 0)
+            if( ! $this->input->is_ajax_request())
             {
-                return FALSE;
+                show_404();
             }
         }
-        return TRUE;
     }
 
 }
@@ -71,6 +64,18 @@ class Admin_Controller extends DD_Controller {
     {
         parent::__construct();
         $this->load->library('DD_Layout',array('site_side' => 'admin','theme_name' => 'main'),'layout');
+
+        if( ! $this->auth->check_access())
+        {
+            if( ! $this->auth->is_logged_in())
+            {
+                //redirect('admin/login');
+            }
+            else
+            {
+                //$this->auth->access_error('admin');
+            }
+        }
     }
 
 }

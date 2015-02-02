@@ -97,7 +97,6 @@ class DD_Layout {
                 $this->set_parts($params['layout_parts']);
             }
         }
-        $this->_load_config();
     }
 
     /**
@@ -156,6 +155,15 @@ class DD_Layout {
             $this->set_parts($layout_parts);
         }
         $this->set_title($title);
+    }
+
+    public function set_theme($theme)
+    {
+        if( ! empty($theme))
+        {
+            $this->_theme_name = $theme;
+            $this->_load_config();
+        }
     }
 
     /**
@@ -450,6 +458,7 @@ class DD_Layout {
      */
     public function render_page($content_data = null, $module_name = '', $view_name = '', $title = '')
     {
+        $this->_load_config();
         if(is_null($content_data))
         {
             $content_data = array();
@@ -459,8 +468,6 @@ class DD_Layout {
             $module_name = $this->_CI->router->fetch_class();
             $view_name = $this->_CI->router->fetch_method();
         }
-        $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
-        $this->_load_config($module_name, $view_name);
         if( ! empty($this->_parts))
         {
             foreach($this->_parts as $part)
@@ -469,6 +476,8 @@ class DD_Layout {
                 $this->_load_config('', $part);
             }
         }
+        $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
+        $this->_load_config($module_name, $view_name);
         $this->set_title($title);
         $data['options'] = $this->_options;
         $data['tags'] = $this->render_tags();

@@ -9,10 +9,27 @@ class DD_Form_validation extends CI_Form_validation {
     {
         parent::__construct();
     }
+
+    public function is_unique($table_name,$id,$field_name,$value)
+    {
+        $current = $this->CI->db->get_where($table_name,array('id' => $id));
+        $current = $current->row_array();
+        if ($value !== $current[$field_name])
+        {
+            $this->CI->db->where_not_in('id', array($id));
+            $result = $this->CI->db->get_where($table_name, array($field_name => $value));
+            if ($result->num_rows() > 0)
+            {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
     public function case_sensitive($value, $params)
     {
         list($table_name, $id, $field_name) = explode('&', $params);
-        if($this->CI->is_unique($table_name, $id, $field_name, $value))
+        if($this->is_unique($table_name, $id, $field_name, $value))
         {
             return TRUE;
         }
