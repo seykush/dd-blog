@@ -16,7 +16,7 @@ class DD_Controller extends CI_Controller {
         $this->_ajax_method_check();
 
 
-        $this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
     }
 
     private function _ajax_method_check()
