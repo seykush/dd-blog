@@ -116,7 +116,7 @@ class DD_Layout {
         $meta = $this->_CI->config->item('meta', $view_name);
         $options =  $this->_CI->config->item('options', $view_name);
         $title =  $this->_CI->config->item('title', $view_name);
-        $layout_parts = $this->_CI->config->item('layout_parts');
+        $layout_parts = $this->_CI->config->item('layout_parts', $view_name);
 
         if(is_array($links))
         {

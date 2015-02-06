@@ -14,7 +14,6 @@ class Main extends Admin_Controller {
 
     public function login()
     {
-        $this->layout->set_theme('auth');
         $this->layout->render_page();
     }
 

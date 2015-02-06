@@ -6,3 +6,10 @@ $config['index']['links'] = array(
 $config['index']['scripts'] = array(
     //array('src' => '/assets/js/admin/modules/main/index.js')
 );
+
+$config['login']['scripts'] = array(
+    //array('src' => '/assets/js/admin/modules/main/login.js')
+);
+$config['login']['layout_parts'] = array();
+$config['login']['title'] = 'Вход в Админ панель';
+
