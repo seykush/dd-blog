@@ -79,7 +79,7 @@ class DD_Layout {
      * Constructor
      * @param null $params
      */
-    public function __construct($params = null)
+    public function __construct($params = NULL)
     {
         $this->_CI = &get_instance();
         if( ! is_null($params) && is_array($params))
@@ -91,10 +91,6 @@ class DD_Layout {
             if(isset($params['theme_name']) && is_string($params['theme_name']))
             {
                 $this->_theme_name = $params['theme_name'];
-            }
-            if(isset($params['layout_parts']))
-            {
-                $this->set_parts($params['layout_parts']);
             }
         }
     }
@@ -150,10 +146,7 @@ class DD_Layout {
                 $this->set_option($name, $val);
             }
         }
-        if(empty($this->_parts))
-        {
-            $this->set_parts($layout_parts);
-        }
+        $this->set_parts($layout_parts);
         $this->set_title($title);
     }
 
@@ -171,21 +164,19 @@ class DD_Layout {
      * @param array $parts
      * @return bool
      */
-    public function set_parts($parts = array())
+    public function set_parts($parts)
     {
-        if( ! empty($parts) && is_array($parts))
+        if(is_array($parts))
         {
             $this->_parts = $parts;
             foreach($this->_parts as $part)
             {
-                $this->_parts_data[$part] = array();
+                if(empty($this->_parts_data[$part]))
+                {
+                    $this->_parts_data[$part] = array();
+                }
             }
         }
-        else
-        {
-            return FALSE;
-        }
-        return TRUE;
     }
 
     /**
@@ -194,17 +185,12 @@ class DD_Layout {
      * @param array $data
      * @return bool
      */
-    public function set_part_data($part_name, $data = array())
+    public function set_part_data($part_name, $data)
     {
-        if( ! empty($data) && is_array($data) && in_array($part_name, $this->_parts))
+        if( ! empty($data) && is_array($data))
         {
             $this->_parts_data[$part_name] = $data;
         }
-        else
-        {
-            return FALSE;
-        }
-        return TRUE;
     }
 
     /**
@@ -405,7 +391,6 @@ class DD_Layout {
                     (isset($attributes['text'])?(" >{$attributes['text']} </script>") : (" {$attributes_html} ></script>"));
             }
         }
-
         return $html;
     }
 
@@ -415,10 +400,9 @@ class DD_Layout {
      * @param $view_name
      * @param null $data
      * @param bool $return
-     * @param bool $to_layout
      * @return bool|void
      */
-    public function render_partial($module_name, $view_name, $data = null, $return = false, $to_layout = false)
+    public function render_partial($module_name, $view_name, $data = NULL, $return = FALSE)
     {
         if(is_null($data))
         {
@@ -430,10 +414,6 @@ class DD_Layout {
             if($return)
             {
                 $view = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $data, $return);
-                if($to_layout)
-                {
-                    $this->_load_config($module_name, $view_name);
-                }
             }
             else
             {
@@ -456,7 +436,7 @@ class DD_Layout {
      * @param string $view_name
      * @param string $title
      */
-    public function render_page($content_data = null, $module_name = '', $view_name = '', $title = '')
+    public function render_page($content_data = NULL, $module_name = '', $view_name = '', $title = '')
     {
         $this->_load_config();
         if(is_null($content_data))
@@ -468,6 +448,8 @@ class DD_Layout {
             $module_name = $this->_CI->router->fetch_class();
             $view_name = $this->_CI->router->fetch_method();
         }
+        $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
+        $this->_load_config($module_name, $view_name);
         if( ! empty($this->_parts))
         {
             foreach($this->_parts as $part)
@@ -476,8 +458,6 @@ class DD_Layout {
                 $this->_load_config('', $part);
             }
         }
-        $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);
-        $this->_load_config($module_name, $view_name);
         $this->set_title($title);
         $data['options'] = $this->_options;
         $data['tags'] = $this->render_tags();
