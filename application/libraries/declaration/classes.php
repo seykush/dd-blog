@@ -14,7 +14,7 @@ class CI_Controller {
 
     /**
      *
-     * @var CI_Router
+     * @var DD_Router
      */
     public $router;
 

@@ -95,5 +95,17 @@ class DD_Router extends CI_Router {
         $this->directory = str_replace(array('.'), '', $dir) . '/';
     }
 
+    public function fetch_group()
+    {
+        list($side,$group) = explode('/',$this->directory);
+        return $group;
+    }
+
+    public function fetch_side()
+    {
+        list($side,$group) = explode('/',$this->directory);
+        return $side;
+    }
+
 
 }

@@ -445,7 +445,12 @@ class DD_Layout {
         }
         if(empty($module_name) && empty($view_name))
         {
+            $group = $this->_CI->router->fetch_group();
             $module_name = $this->_CI->router->fetch_class();
+            if( ! empty($group))
+            {
+                $module_name = $group .'/'.$module_name;
+            }
             $view_name = $this->_CI->router->fetch_method();
         }
         $data['content'] = $this->_CI->load->view("{$this->_site_side}/modules/{$module_name}/{$view_name}", $content_data, true);

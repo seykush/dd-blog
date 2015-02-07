@@ -47,7 +47,8 @@ class DD_Auth {
 
     public function check_access()
     {
-        list($side,$group) = explode('/',$this->_CI->router->fetch_directory());
+        $side = $this->_CI->router->fetch_side();
+        $group = $this->_CI->router->fetch_group();
         $controller = $this->_CI->router->fetch_class();
         $method = $this->_CI->router->fetch_method();
         $roles = array();
