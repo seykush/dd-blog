@@ -466,7 +466,7 @@ class DD_Layout {
         $this->set_title($title);
         $data['options'] = $this->_options;
         $data['tags'] = $this->render_tags();
-
+        $data['title'] = $this->get_title();
         $this->_CI->load->view("{$this->_site_side}/layout/{$this->_theme_name}/template", $data);
     }
 }

@@ -11,8 +11,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">Что то</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Что то</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin/logout" class="pull-right">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        Выйти
+                    </a>
+                </li>
             </ul>
         </div>
+
     </div>
 </div>

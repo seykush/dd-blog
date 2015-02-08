@@ -1,25 +1,17 @@
 <?php if( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Class Template_model
+ * Class User_model
  */
-class Template_model extends DD_Model {
-
-    /*
-     * For example we have 2 tables:
-     * test (id,name, test_info_id)
-     * test_info (id, date)
-     *
-     * */
+class User_model extends DD_Model {
 
     /**
      * @var array
      */
     private $_select = array(
-        't.id',
-        't.name',
-        't.test_info_id',
-        'ti.date as test_date',
+        'u.id',
+        'u.email',
+        'u.role',
     );
 
     /**
@@ -31,14 +23,12 @@ class Template_model extends DD_Model {
     public function get_by_field($field_name, $value)
     {
         $this->db->select($this->_select);
-        $this->db->join('test_info as ti', 't.test_info_id = ti.id', 'left');
-        $query = $this->db->get_where('test as t', array($field_name => $value));
+        $query = $this->db->get_where('user as u', array($field_name => $value));
         if($query->num_rows > 0)
         {
             return $query->row_array();
         }
         return FALSE;
-
     }
 
     /**
@@ -49,15 +39,14 @@ class Template_model extends DD_Model {
      *
      * @return bool
      */
-    public function get($start_pos = 0, $count = null, $select = null, $query_data = null)
+    public function get($start_pos = 0, $count = NULL, $select = NULL, $query_data = NULL)
     {
         if( ! is_null($select))
         {
             $this->_select = array_merge($this->_select, $select);
         }
         $this->db->select($this->_select);
-        $this->db->join('test_info as ti', 't.test_info_id = ti.id', 'left');
-        $this->db->from('test as t');
+        $this->db->from('user as u');
         if( ! is_null($query_data))
         {
             $query_params = isset($query_data['params']) ? $query_data['params'] : array();
@@ -88,7 +77,7 @@ class Template_model extends DD_Model {
     {
         if( ! empty($data) && is_array($data))
         {
-            if($this->db->insert('test', $data))
+            if($this->db->insert('user', $data))
             {
                 return TRUE;
             }
@@ -107,7 +96,7 @@ class Template_model extends DD_Model {
         if( ! empty($id) && ! empty($data) && is_array($data))
         {
             $this->db->where('id', $id);
-            if($this->db->update('test', $data))
+            if($this->db->update('user', $data))
             {
                 return TRUE;
             }
@@ -123,7 +112,7 @@ class Template_model extends DD_Model {
     public function delete($id)
     {
         $this->db->where('id', $id);
-        if($this->db->delete('test'))
+        if($this->db->delete('user'))
         {
             return TRUE;
         }
@@ -135,6 +124,6 @@ class Template_model extends DD_Model {
      */
     public function count_all()
     {
-        return $this->db->count_all('test');
+        return $this->db->count_all('user');
     }
 }

@@ -69,11 +69,11 @@ class Admin_Controller extends DD_Controller {
         {
             if( ! $this->auth->is_logged_in())
             {
-                //redirect('admin/login');
+                redirect('admin/login');
             }
             else
             {
-                //$this->auth->access_error('admin');
+                $this->auth->access_error('admin');
             }
         }
     }

@@ -136,23 +136,19 @@ class DD_Auth {
 
     public function login($to_side,$user_data, $extra_data = NULL)
     {
-        if( ! in_array($user_data['role'],$this->_login_access[$to_side]))
+        if( ! in_array($user_data['role'], $this->_login_access[$to_side]))
         {
             return FALSE;
         }
 
-        if( ! empty($user_data) && is_array($user_data))
+        if( ! empty($extra_data) && is_array($extra_data))
         {
-            if( ! empty($extra_data) && is_array($extra_data))
-            {
-                $user_data = array_merge($user_data, $extra_data);
-            }
-            $this->_CI->session->set_userdata(array(
-                'user' => $user_data
-            ));
-            return TRUE;
+            $user_data = array_merge($user_data, $extra_data);
         }
-        return FALSE;
+        $this->_CI->session->set_userdata(array(
+            'user' => $user_data
+        ));
+        return TRUE;
     }
 
     /**

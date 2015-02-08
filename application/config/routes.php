@@ -42,6 +42,7 @@ $route['default_controller'] = "frontend/main";
 $route['404_override'] = '';
 $route['admin'] = 'admin/main';
 $route['admin/login'] = 'admin/main/login';
+$route['admin/logout'] = 'admin/main/logout';
 $route['admin/(:any)'] = 'admin/$1';
 $route['(:any)'] = 'frontend/$1';
 

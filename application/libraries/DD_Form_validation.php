@@ -40,25 +40,35 @@ class DD_Form_validation extends CI_Form_validation {
         }
     }
 
-    public function response($status, $system_error = '', $field_data = null, $additional_data = null)
+    public function ajax_success_response($success_url = '', $msg = '', $data = NULL)
     {
-        if( ! empty($field_data) && is_array($field_data))
+        if( ! empty($msg))
         {
-            foreach($field_data as $key => $val)
-            {
-                if(isset($this->_field_data[$key]))
-                {
-                    $this->_field_data[$key]['error'] = $val;
-                }
-            }
+            $success_url .= "?success_msg={$msg}";
         }
-        $this->_error_array['system_error'] = $system_error;
-        $error_data = array(
-            'status' => $status,
-            'errors' => $this->_error_array,
-            'field_data' => $this->_field_data,
-            'data' => $additional_data
+        $response_data = array(
+            'status' => 'success',
+            'success_url' => $success_url,
+            'msg' => $msg,
+            'data' => $data
         );
-        exit(json_encode($error_data));
+        exit(json_encode($response_data));
+    }
+
+    public function ajax_error_response($form_error = '', $data = NULL)
+    {
+        $fields = array();
+        foreach($this->_field_data as $key => $val)
+        {
+            $fields[] = $key;
+        }
+        $response_data = array(
+            'status' => 'failed',
+            'form_error' => $form_error,
+            'errors' => $this->_error_array,
+            'fields' => $fields,
+            'data' => $data
+        );
+        exit(json_encode($response_data));
     }
 }

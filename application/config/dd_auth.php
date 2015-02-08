@@ -13,6 +13,7 @@ $config['default']['access'] = array(
         'main' => array(
             'index' => array('admin'),
             'login' => array('*'),
+            'logout' => array('*'),
             'ajax_login' => array('*')
         )
     ),

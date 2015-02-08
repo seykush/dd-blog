@@ -184,6 +184,12 @@ class CI_Controller {
      */
     public $auth;
 
+    /**
+     *
+     * @var User_model
+     */
+    public $user_model;
+
 
 
 }
