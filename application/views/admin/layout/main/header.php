@@ -12,6 +12,8 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Что то</a></li>
+                <li><a href="/admin/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Пользователи</a></li>
+                <li><a href="/admin/posts"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Посты</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

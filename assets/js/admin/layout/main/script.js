@@ -1,6 +1,5 @@
 $(function() {
 
-
     var error = getParameterByName('error');
     var success_msg = getParameterByName('success_msg');
     if(error == 'access'){
@@ -22,6 +21,11 @@ $(function() {
         });
         history.pushState('', '', location.pathname);
     }
+
+    $('#pageActions').on('click',function(e){
+        e.preventDefault();
+        $('.actions').toggle('slow');
+    })
 });
 
 

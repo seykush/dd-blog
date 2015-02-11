@@ -15,6 +15,12 @@ $config['default']['access'] = array(
             'login' => array('*'),
             'logout' => array('*'),
             'ajax_login' => array('*')
+        ),
+        'user' => array(
+            'index' => array('admin'),
+        ),
+        'post' => array(
+            'index' => array('admin'),
         )
     ),
     'frontend' => array(

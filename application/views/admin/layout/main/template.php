@@ -10,10 +10,15 @@
             <div class="main <?php echo isset($options['content_size'])? $options['content_size'] : 'col-sm-12'; ?>">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
+                        <h3 class="panel-title pull-left">
                             <?php echo isset($options['icon'])? $options['icon'] : ''; ?>
                             <?php echo isset($title)? $title : ''; ?>
                         </h3>
+                        <a href="#" id="pageActions" class="btn btn-sm btn-add btn-black pull-right">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                            Действия
+                        </a>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
                         <?php echo $content; ?>
